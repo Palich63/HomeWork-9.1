@@ -3,13 +3,11 @@ package ru.netology.manager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class FileOpenManagerTest {
 
-    FileOpenManager manager = new FileOpenManager();
+    private FileOpenManager manager = new FileOpenManager();
 
     @BeforeEach
     void shouldSetUp() {
@@ -40,22 +38,15 @@ class FileOpenManagerTest {
     @Test
     void shouldDeleteMapByKey() {
         //Удаление по ключу
-        Set<String> actual = new HashSet<>();
-        actual.add("jpg");
-        actual.add("dwg");
         manager.removeMap("doc");
-        assertEquals(manager.getAllKey(), actual);
+        assertFalse(manager.containsKey("doc"));
     }
 
     @Test
     void shouldReplaceValue() {
         //Изменение значения по ключу если пара ключ значение соответствуют
-        Collection<String> actual = new HashSet<>();
-        actual.add("Paint");
-        actual.add("FreeCAD");
-        actual.add("MS Word");
         manager.replaceValue("dwg", "AutoCAD", "FreeCAD");
-        assertEquals(manager.getAllValue(), actual);
+        assertEquals("FreeCAD", manager.getValue("dwg"));
     }
 
 }

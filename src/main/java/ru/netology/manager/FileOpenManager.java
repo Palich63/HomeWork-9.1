@@ -1,21 +1,13 @@
 package ru.netology.manager;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
-import java.util.*;
-
-
-@Data
-@AllArgsConstructor
 public class FileOpenManager {
 
     private Map<String, String> maps = new HashMap<>();
-
-    public FileOpenManager() {
-
-    }
 
     //Создание новой записи в Map
     public void saveMap(String key, String value) {
@@ -32,19 +24,12 @@ public class FileOpenManager {
         return maps.values();
     }
 
-    // Получения записей в виде коллекции Set
-    public Set set() {
-        return maps.entrySet();
-    }
-
     //Функция проверки присутствия объекта по ключу без учёта регистра
-    // Но при этом я пожертвовал методом containsKey, если проделать тоже самое, но с этим методом, я рад был бы узнать как.
     public boolean containsKey(String key) {
-        Iterator iterator = maps.keySet().iterator();
-        while (iterator.hasNext()) {
-            if (key.equalsIgnoreCase((String) iterator.next()))
+        for (String k : maps.keySet())
+            if (k.equalsIgnoreCase(key)) {
                 return true;
-        }
+            }
         return false;
     }
 
